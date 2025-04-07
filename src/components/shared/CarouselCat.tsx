@@ -1,23 +1,32 @@
-'use client';
-import { useEffect, useState } from "react";
-export default function Carousel() {
-    
-    const [cats, setCats] = useState ([]);
+import * as React from "react"
 
-    useEffect (() => {
-        const fetchCats = async () => {
-            const response = await fetch ('https://api.thecatapi.com/v1/images/search?limit=10')
-            const data = await response.json();
-            setCats(data);
-        };
-        fetchCats ();
-}, []);
-    
-    return (
-        <div className="grid grid-cols-2 gap-4 p-4"> 
-            {cats.map((cat: any) => (
-                <img key={cat.id} src={cat.url} alt="Gato fofo" className="rounded-lg shadow-md" />
-            ))}
-        </div>
-    );       
+import { Card, CardContent } from "@/components/ui/card"
+import {
+  Carousel as ShadcnCarousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
+export function Carousel() {
+  return (
+    <ShadcnCarousel className="w-full max-w-xs">
+      <CarouselContent>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index}>
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </ShadcnCarousel>
+  )
 }
