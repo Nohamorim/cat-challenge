@@ -8,17 +8,32 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+interface Cat {
+  id: string;
+  url: string | null;
+}
+interface CarouselProps {
+  cats: Cat[]; // Agora, o Carousel espera receber uma lista de gatos
+}
 
-export function Carousel() {
+export function Carousel({cats}: CarouselProps) {
   return (
     <ShadcnCarousel className="w-full max-w-xs">
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
+        {cats.map((cat, index) => (
+          <CarouselItem key={cat.id}>
             <div className="p-1">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
+                  {cat.url ? (
+                    <img
+                      src={cat.url}
+                      alt={`Gato ${index + 1}`}
+                      className="w-full h-auto object-cover"
+                    />
+                  ) : (
+                    <span>Imagem não disponível</span>
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -28,5 +43,5 @@ export function Carousel() {
       <CarouselPrevious />
       <CarouselNext />
     </ShadcnCarousel>
-  )
+);
 }
