@@ -13,7 +13,7 @@ interface Cat {
   url: string | null;
 }
 interface CarouselProps {
-  cats: Cat[]; // Agora, o Carousel espera receber uma lista de gatos
+  cats: Cat[]; 
 }
 
 export function Carousel({cats}: CarouselProps) {

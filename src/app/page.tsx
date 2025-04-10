@@ -1,5 +1,5 @@
 "use client";
-import { Carousel } from "@/components/shared/CarouselCat";// Verifique se a importação está correta
+import { Carousel } from "@/components/shared/CarouselCat";
 import { useEffect, useState } from "react";
 
 interface Cat {
